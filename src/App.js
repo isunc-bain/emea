@@ -9,6 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import { config } from '../server/routes/api/config';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,8 +24,8 @@ const useStyles = makeStyles(theme => ({
   content: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 }));
 
 export default function CategoryPage() {
@@ -34,7 +35,7 @@ export default function CategoryPage() {
 
   useEffect(() => {
     function fetchBooks() {
-      fetch('http://localhost:3000/api/books')
+      fetch(config.API_URL + '/api/books')
         .then(res => res.json())
         .then(booksObj => setBooks(booksObj));
     }

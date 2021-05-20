@@ -16,7 +16,7 @@ npm run bootServer
 ```
 
 #### Architecture and performance fixes
-1. Introduced a simple `memory-cache` library that provides a cache that loads (only once) the books from the CSV file, instead of every time `GET /api/books` is called
+1. Introduced a simple `memory-cache` library that provides a cache to which the books from the CSV file are loaded once, instead of every time `GET /api/books` is called
 2. The GET endpoints therefore retrieve books and book details by loading from this cache
 3. Restructured the folders into components, routes, and api
 4. Introduced Jest and Supertest for api endpoint integration testing

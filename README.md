@@ -1,85 +1,40 @@
-EMEA Take Home Challenge
-=================
 
-## Delivery instructions
+This demo implements a very simple API for books and a frontend that lists books, details, and performs basic actions in a shopping cart
 
-### If you received this code as a zip file
-- Extract the zip file
-- Initialize git
-- Push your changes to a public Github repo
-- For review, send us the public repo URL
+#### How to run
+* First install the npm dependencies
+```shell script
+npm run install
+```
+* Start the DEV mode of the frontend 
+```shell script
+npm start 
+```
+* Start the rest API server 
+```shell script
+npm run bootServer
+```
 
-### If you received this code by getting access to this repo
-- **FORK** this repo as a very first step
-- Push your changes to this forked (public) Github repo
-- For review, send us the public repo URL
+#### Architecture and performance fixes
+1. Introduced a simple `memory-cache` library that provides a cache that loads (only once) the books from the CSV file, instead of every time `GET /api/books` is called
+2. The GET endpoints therefore retrieve books and book details by loading from this cache
+3. Restructured the folders into components, routes, and api
+4. Introduced Jest and Supertest for api endpoint integration testing
+5. Used React Hooks (`useState`) to manage internal component state
+6. Introduced a `config.js` to enable management of different environment variables for `dev`, `staging`, `production`
+7. Added simple error handling for 404 and 500 http errors
+8. Fixed the continuous request to `/api/books` in the listing page by fixing the `useEffect deps` parameter
 
----
+#### How to run the api endpoint tests
+```shell script
+npm test 
+```
 
-# 1. The Challenge
-The end result of the challenge should be a bookshop that has:
-* A listing page
-* A product detail page
-* A cart page
+#### Considerations and further improvements if more time is I had more free time
+1. Introduce a centralized error handling / middleware and logging library
+2. Leverage the `memory-cache` to persist cart item data
+3. Use reducer to manage actions on the cart
+4. Add test to the frontend functionality (ie. actions on the cart)
+5. Create Docker and Docker Compose to run both the server and the frontend
 
-# 2. What we will be looking at
-* Your API
-    * Are you following an API design?
-    * Are you using appropriate HTTP methods?
-    * Are handling your errors?
-* Your app
-    * Is there any directory structure?
-    * Are you using modern React features?
-    * How are you handling API responses?
-    * What's the bundle size?
-* Tests
-    * What kind of tests have you written (integration, unit, e2e)?
-    * What are you testing?
-* Performance
-    * There are already specific performance problems in both the frontend and backend. You should find and address these.
-    * Your supplied solution will also be tested for performance in general.
-* Git skills
-    * We would like to see the history of your improvements via git.
-* UI
-    * Make it look nice, e.g. by using Material UI components (**Disclaimer: the project has been bootstrapped with Material UI!**)
-* Basic documentation
-   * How to start the app, architecture, etc
 
-# 3. The Stack
-As you can see the codebase is already bootstrapped with a frontend and a backend.
-
-The frontend uses:
-* [React](https://reactjs.org/)
-* [Material UI](https://material-ui.com/)
-* [Parcel](https://parceljs.org/)
-* [Babel](https://babeljs.io/)
-* [Eslint](https://eslint.org/)
-* [Prettier](https://prettier.io/)
-
-The backend is headless and uses:
-* [Node.js](https://nodejs.org/en/)
-* [Express](https://expressjs.com/)
-
-# 4. Useful scripts
-After you `npm run install`, you can:
-* Start the DEV mode of the frontend by executing `npm start`.
-* Start the REST API server by executing `npm run bootServer`.
-    * Make sure your Node.js version is `>=10`.
-
-A CSV file is loaded into memory and serves as the data backend for the books API.
-
-# 5. Requirements
-1. Extend the codebase by adding a router that navigates to the listing page (already implemented), the product detail page and the cart page.
-
-2. Implement the product detail page
-    * The product detail page should display all the details available for a single book.
-    * A user can add a book to the cart
-         * There's no need to store cart information to the backend here. Use the browser's storage.
-
-3. Implement the cart page
-    * It should list all the books that are added to the cart by the user.
-    * Users should be able to clear the cart or remove items from the cart.
-
-Feel free to change anything that is already implemented, e.g. better directory and component structure. You should fix any bugs or anything that can hurt backend and frontend performance.
-
-# 6. Be prepared to do a pair review of the delivered codebase

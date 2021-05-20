@@ -1,15 +1,14 @@
 import { makeStyles } from '@material-ui/core/styles';
-import React, { useEffect, useState } from 'react';
-import { config } from '../../server/routes/api/config';
+import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import BookCard from './BookCard';
+import Link from '@material-ui/core/Link';
 
-const CategoryPage = () => {
+const Header = ({ children }) => {
   const useStyles = makeStyles(theme => ({
     root: {
       flexGrow: 1,
@@ -29,18 +28,6 @@ const CategoryPage = () => {
 
   const classes = useStyles();
 
-  const [books, setBooks] = useState({});
-
-  useEffect(() => {
-    function fetchBooks() {
-      fetch(config.API_URL + '/api/books')
-        .then(res => res.json())
-        .then(booksObj => setBooks(booksObj));
-    }
-
-    fetchBooks();
-  }, []);
-
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -54,16 +41,18 @@ const CategoryPage = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Book Shop
+            <Button variant="contained" color="inherit">
+              <Link href="/" style={{ textDecoration: 'none' }}>Book Shop</Link>
+            </Button>
           </Typography>
-          <Button color="inherit">Cart</Button>
+          <Button variant="contained" color="inherit">
+            <Link href="/cart" style={{ textDecoration: 'none' }}>Cart</Link>
+          </Button>
         </Toolbar>
       </AppBar>
-      <main className={classes.content}>
-        <BookCard books={books} />
-      </main>
+      <main className={classes.content}>{children}</main>
     </div>
   );
 };
 
-export default CategoryPage;
+export default Header;

@@ -6,7 +6,7 @@ function loadBooksToCache() {
     .fromFile(__dirname + '/../books.csv')
     .then(books => {
       books.map((book, i) => {
-        book.id = i;
+        book.id = i + 1;
       });
       mCache.put('books', books);
     });

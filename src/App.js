@@ -1,6 +1,8 @@
 import React from 'react';
-import CategoryPage from './components/CategoryPage';
+import Routes from './routes';
 
-const App = () => <CategoryPage />;
+const App = () => {
+  return <Routes />;
+};
 
 export default App;

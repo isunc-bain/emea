@@ -1,5 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App.js';
+import Header from './shared/Header';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <Header>
+    <App />
+  </Header>,
+  document.getElementById('root')
+);
